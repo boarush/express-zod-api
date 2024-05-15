@@ -21,11 +21,13 @@ export const updateUserEndpoint =
           ),
         name: z.string().min(1),
         birthday: ez.dateIn(),
+        "x-request-id": z.string(),
       })
       .example({
         id: "12",
         name: "John Doe",
         birthday: "1963-04-21",
+        "x-request-id": "abc"
       }),
     output: z
       .object({

@@ -8,12 +8,13 @@ export const createUserEndpoint = statusDependingFactory.build({
   method: "post",
   tag: "users",
   input: z.object({
+    "x-request-id": z.string(),
     name: z.string().min(1),
   }),
   output: z.object({
     id: z.number().int().positive(),
   }),
-  handler: async ({ input: { name } }) => {
+  handler: async ({ input: { name, "x-request-id": requestid } }) => {
     assert(name !== "Gimme Jimmy", createHttpError(500, "That went wrong"));
     assert(
       name !== "James McGill",

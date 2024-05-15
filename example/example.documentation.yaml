@@ -19,6 +19,12 @@ paths:
             type: string
             pattern: \d+
             description: a numeric string containing the id of the user
+        - name: x-request-id
+          in: query
+          required: true
+          description: GET /v1/user/retrieve Parameter
+          schema:
+            type: string
       responses:
         "200":
           description: GET /v1/user/retrieve Positive response
@@ -122,16 +128,20 @@ paths:
                   pattern: ^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?)?Z?$
                   externalDocs:
                     url: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+                x-request-id:
+                  type: string
               required:
                 - key
                 - name
                 - birthday
+                - x-request-id
             examples:
               example1:
                 value:
                   key: 1234-5678-90
                   name: John Doe
                   birthday: 1963-04-21
+                  x-request-id: abc
       security:
         - APIKEY_1: []
           APIKEY_2: []
@@ -211,10 +221,13 @@ paths:
             schema:
               type: object
               properties:
+                x-request-id:
+                  type: string
                 name:
                   type: string
                   minLength: 1
               required:
+                - x-request-id
                 - name
       responses:
         "201":

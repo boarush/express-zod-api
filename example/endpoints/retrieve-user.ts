@@ -29,6 +29,7 @@ export const retrieveUserEndpoint = taggedEndpointsFactory
         .regex(/\d+/)
         .transform((id) => parseInt(id, 10))
         .describe("a numeric string containing the id of the user"),
+      "x-request-id": z.string()
     }),
     output: z.object({
       id: z.number().int().nonnegative(),
